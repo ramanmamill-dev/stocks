@@ -1,10 +1,13 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useState, useEffect, useCallback } from 'react';
 import type { ScreenerFilter } from '@/types/signal';
 import { ScreenerPanel } from '@/components/screener/ScreenerPanel';
 import { SignalBadge } from '@/components/signals/SignalBadge';
-import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
+
+export const dynamic = 'force-dynamic';
 
 interface ScreenerResult {
   symbol: string;
@@ -29,7 +32,6 @@ interface ApiResponse {
 
 export default function ScreenerPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const pathname = usePathname();
 
   const [results, setResults] = useState<ScreenerResult[]>([]);
@@ -167,7 +169,7 @@ export default function ScreenerPage() {
                         >
                           <td className="px-4 py-3">
                             <span className="font-medium text-[#0B0E11]">
-                              {stock.symbol.replace('.NS', '').replace('.BO', ',')}
+                              {stock.symbol.replace('.NS', '').replace('.BO', '')}
                             </span>
                           </td>
                           <td className="px-4 py-3 text-sm text-[#787B86]">{stock.name}</td>

@@ -17,5 +17,20 @@ services:
         sync: false
       - key: UPSTASH_REDIS_TOKEN
         sync: false
+      - key: NEXT_PUBLIC_APP_URL
+        value: https://stocksignal-ai.onrender.com
+      - key: NEXT_PUBLIC_SITE_NAME
+        value: StockSignal AI
     healthCheckPath: /api/health
     autoDeploy: true
+
+# Health check configuration
+# Render pings this endpoint every 5 minutes by default
+# For 10-minute cron-job.org pings, set up a separate cron trigger
+
+# Keep-alive documentation:
+# To prevent sleeping during business hours (9 AM - 4 PM IST),
+# configure cron-job.org to ping /api/health every 10 minutes
+# Cron URL: https://stocksignal-ai.onrender.com/api/health
+# Cron schedule: every 10 minutes
+# Business hours ping: 03:30-08:30 UTC (9 AM - 4 PM IST)
