@@ -1,4 +1,4 @@
-import type { SignalResult } from '@/types/signal';
+import type { SignalResult, ScreenerFilter } from '@/types/signal';
 import type { Candle, Timeframe } from '@/types/stock';
 import { sanitizeSymbol } from '@/lib/validators';
 import { getCached, setCached } from './cache';
@@ -121,6 +121,6 @@ export async function getTopSignals(limit: number = 10): Promise<SignalResult[]>
   return results;
 }
 
-export async function runScreener(_filters: unknown): Promise<SignalResult[]> {
+export async function runScreener(_filters: ScreenerFilter): Promise<SignalResult[]> {
   return [];
 }
