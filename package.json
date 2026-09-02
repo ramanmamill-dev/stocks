@@ -1,0 +1,33 @@
+{
+  "name": "stocksignal-ai",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "@supabase/supabase-js": "^2.38.0",
+    "@upstash/redis": "^1.24.0",
+    "yahoo-finance2": "^1.7.0",
+    "lightweight-charts": "^4.1.0",
+    "fuse.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "autoprefixer": "^10.0.0",
+    "postcss": "^8.0.0",
+    "tailwindcss": "^3.3.0",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "^14.0.0"
+  }
+}
