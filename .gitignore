@@ -8,3 +8,7 @@ build
 .DS_Store
 *.tsbuildinfo
 next-env.d.ts.bak
+tailwind.config.js
+scripts/**/*.js
+scripts/**/*.cjs
+scripts/**/*.mjs

@@ -2,15 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import { isMarketOpen } from '@/services/market/status';
+import type { MarketStatus } from '@/types/signal';
 
-export function useMarketStatus() {
-  const [status, setStatus] = useState(isMarketOpen());
+/**
+ * Client-side hook that re-evaluates market status every minute.
+ */
+export function useMarketStatus(): MarketStatus {
+  const [status, setStatus] = useState<MarketStatus>(() => isMarketOpen());
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setStatus(isMarketOpen());
-    }, 60000);
-
+    const tick = () => setStatus(isMarketOpen());
+    const interval = setInterval(tick, 60000);
     return () => clearInterval(interval);
   }, []);
 
