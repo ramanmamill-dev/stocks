@@ -1,4 +1,7 @@
 import type { Metadata } from 'next';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+import MarketStatusBanner from '@/components/layout/MarketStatusBanner';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -14,13 +17,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        style={{
-          fontFamily:
-            "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-        }}
-      >
-        {children}
+      <body className="min-h-screen flex flex-col bg-[#F8F9FC]">
+        <MarketStatusBanner />
+        <Header />
+        <main className="flex-1">{children}</main>
+        <Footer />
       </body>
     </html>
   );

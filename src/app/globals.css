@@ -3,12 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 30, 30, 42;
+  --foreground-rgb: 11, 14, 17;
   --background-rgb: 248, 249, 252;
   --primary: #00b386;
+  --primary-dark: #009970;
   --success: #00e6a0;
   --warning: #f0b90b;
   --danger: #f23645;
+  --text-secondary: #787b86;
+  --border: #e0e3eb;
 }
 
 html,
@@ -20,11 +23,19 @@ body {
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
     Arial, sans-serif;
-  line-height: 1.7;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }
