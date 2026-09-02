@@ -1,12 +1,10 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
-
 export const metadata: Metadata = {
-  title: 'StockSignal AI – Full Product Specification (Updated)',
-  description: 'Enterprise-Grade Web App for NSE & BSE Stock Analysis',
+  title: 'StockSignal AI – NSE & BSE Stock Analysis',
+  description:
+    'Enterprise-Grade Web App for NSE & BSE Stock Analysis with real-time signals, charts, and watchlist.',
 };
 
 export default function RootLayout({
@@ -16,7 +14,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        style={{
+          fontFamily:
+            "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+        }}
+      >
+        {children}
+      </body>
     </html>
   );
 }

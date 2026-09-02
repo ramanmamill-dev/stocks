@@ -1,19 +1,25 @@
+'use client';
+
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import MarketStatusBanner from '@/components/layout/MarketStatusBanner';
 import { useMarketStatus } from '@/hooks/useMarketStatus';
 
-function HomeContent() {
+export default function Home() {
   const { open, message } = useMarketStatus();
 
   return (
     <div className="min-h-screen bg-background">
-      <MarketStatusBanner isOpen={open} message={message} lastUpdated={new Date().toISOString()} />
+      <MarketStatusBanner
+        isOpen={open}
+        message={message}
+        lastUpdated={new Date().toISOString()}
+      />
       <Header />
       <main className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-4">📈 StockSignal AI</h1>
         <p className="text-lg text-gray-600 mb-8">
-          Enterprise-Grade Web App for NSE & BSE Stock Analysis
+          Enterprise-Grade Web App for NSE &amp; BSE Stock Analysis
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white rounded-lg shadow p-6">
@@ -36,8 +42,4 @@ function HomeContent() {
       <Footer />
     </div>
   );
-}
-
-export default function Home() {
-  return <HomeContent />;
 }
