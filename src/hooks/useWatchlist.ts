@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 export function useWatchlist() {
   const [watchlist, setWatchlist] = useState<string[]>([]);
 
