@@ -4,6 +4,7 @@ const nextConfig = {
   images: {
     remotePatterns: [],
   },
+  turbopack: {},
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,

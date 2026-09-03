@@ -161,7 +161,7 @@ describe('E2E: Full signal flow (market status -> quote -> signal)', () => {
 
     const { GET } = await import('@/app/api/signal/[symbol]/route');
     const request = new Request('http://localhost:3000/api/signal/RELIANCE.NS');
-    const response = await GET(request, { params: { symbol: 'RELIANCE.NS' } });
+    const response = await GET(request, { params: Promise.resolve({ symbol: 'RELIANCE.NS' }) });
     const data = await response.json();
 
     expect(response.status).toBe(200);
@@ -210,7 +210,7 @@ describe('E2E: Full signal flow (market status -> quote -> signal)', () => {
 
     const { GET } = await import('@/app/api/signal/[symbol]/route');
     const request = new Request('http://localhost:3000/api/signal/RELIANCE.NS');
-    const response = await GET(request, { params: { symbol: 'RELIANCE.NS' } });
+    const response = await GET(request, { params: Promise.resolve({ symbol: 'RELIANCE.NS' }) });
     const data = await response.json();
 
     expect(response.status).toBe(200);
@@ -290,7 +290,7 @@ describe('E2E: Error handling flow', () => {
   it('invalid symbol returns 400', async () => {
     const { GET } = await import('@/app/api/signal/[symbol]/route');
     const request = new Request('http://localhost:3000/api/signal/INVALID!');
-    const response = await GET(request, { params: { symbol: 'INVALID!' } });
+    const response = await GET(request, { params: Promise.resolve({ symbol: 'INVALID!' }) });
 
     expect(response.status).toBe(400);
   });
@@ -308,7 +308,7 @@ describe('E2E: Error handling flow', () => {
 
     const { GET } = await import('@/app/api/signal/[symbol]/route');
     const request = new Request('http://localhost:3000/api/signal/RELIANCE.NS');
-    const response = await GET(request, { params: { symbol: 'RELIANCE.NS' } });
+    const response = await GET(request, { params: Promise.resolve({ symbol: 'RELIANCE.NS' }) });
     const data = await response.json();
 
     expect(response.status).toBe(503);

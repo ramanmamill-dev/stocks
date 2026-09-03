@@ -8,10 +8,11 @@ export const runtime = 'nodejs';
 
 export async function GET(
   _request: Request,
-  { params }: { params: { symbol: string } }
+  { params }: { params: Promise<{ symbol: string }> }
 ) {
   try {
-    const symbol = sanitizeSymbol(params.symbol);
+    const { symbol: rawSymbol } = await params;
+    const symbol = sanitizeSymbol(rawSymbol);
     const market = isMarketOpen();
 
     let quote;
