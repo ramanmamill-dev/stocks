@@ -12,7 +12,35 @@ StockSignal AI is a professional, Bloomberg-style web application that provides 
 
 It operates on a hybrid selection model (Type to Search & Click to Explore) and delivers analysis across **1m, 5m, 15m, 1h, and 1d** timeframes. When the market is closed, the UI automatically switches to **End-of-Day (EOD)** static data mode, ensuring users always see the last known closing price.
 
-## 2. Key Features
+## Quick Start
+
+```bash
+# Clone and install
+git clone https://github.com/<your-username>/stocks.git
+cd stocks
+npm install
+
+# Set up environment
+cp .env.example .env.local
+# Edit .env.local with your credentials (see docs/setup.md)
+
+# Run development server
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view the app.
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run test` | Run all tests (272 tests) |
+| `npm run lint` | Run ESLint |
+| `npm run typecheck` | TypeScript type checking |
+
+> **📖 Full setup guide:** see [docs/setup.md](docs/setup.md) | **👥 Contributing:** see [CONTRIBUTING.md](CONTRIBUTING.md) | **📝 Changelog:** see [CHANGELOG.md](CHANGELOG.md)
+
+## Key Features
 
 | Feature | Description |
 |---------|-------------|
@@ -717,7 +745,7 @@ function calculateNetProfit(buyPrice: number, sellPrice: number, quantity: numbe
 }
 ```
 
-### 17.13 Testing Strategy
+## 17.13 Testing Strategy
 
 **Unit Tests:**
 - `isMarketOpen()`: Test weekends, holidays, pre-market, post-market, exact boundary times (9:15, 15:30)
