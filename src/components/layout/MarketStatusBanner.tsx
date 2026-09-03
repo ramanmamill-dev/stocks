@@ -1,9 +1,16 @@
 'use client';
 
 import { useMarketStatus } from '@/hooks/useMarketStatus';
+import { useState, useEffect } from 'react';
+import { formatIST } from '@/lib/utils';
 
 export default function MarketStatusBanner() {
-  const { open, message, timestamp } = useMarketStatus();
+  const { open, message } = useMarketStatus();
+  const [displayTime, setDisplayTime] = useState('');
+
+  useEffect(() => {
+    setDisplayTime(formatIST(new Date()));
+  }, []);
 
   if (open) {
     return (
@@ -17,10 +24,7 @@ export default function MarketStatusBanner() {
         <span>Live market data</span>
         <span className="mx-2">·</span>
         <span className="text-[#787B86]">
-          Updated:{' '}
-          {new Date(timestamp).toLocaleString('en-IN', {
-            timeZone: 'Asia/Kolkata',
-          })}
+          Updated: {displayTime}
         </span>
       </div>
     );
@@ -37,10 +41,7 @@ export default function MarketStatusBanner() {
       <span>Showing Last Traded Price (EOD)</span>
       <span className="mx-2">·</span>
       <span className="text-[#787B86]">
-        Updated:{' '}
-        {new Date(timestamp).toLocaleString('en-IN', {
-          timeZone: 'Asia/Kolkata',
-        })}
+        Updated: {displayTime}
       </span>
     </div>
   );
