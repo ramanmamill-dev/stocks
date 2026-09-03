@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StockSignal AI – Development Chunks</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #f8f9fc;
+      color: #1e1e2a;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2.4rem;
+      border-bottom: 3px solid #00b386;
+      padding-bottom: 0.75rem;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      font-size: 1.1rem;
+      color: #4a5568;
+      margin-bottom: 2rem;
+    }
+    .chunk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+    .chunk-card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      overflow: hidden;
+      border-top: 4px solid #00b386;
+    }
+    .chunk-card.closed {
+      border-top-color: #6b7280;
+    }
+    .chunk-card.in-progress {
+      border-top-color: #f0b90b;
+    }
+    .chunk-header {
+      padding: 1.25rem 1.5rem 0.75rem;
+      border-bottom: 1px solid #f1f4f8;
+    }
+    .chunk-header h2 {
+      font-size: 1.15rem;
+      margin: 0 0 0.25rem;
+      color: #0b0e11;
+    }
+    .chunk-header .chunk-meta {
+      font-size: 0.8rem;
+      color: #6b7280;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .chunk-body {
+      padding: 1rem 1.5rem 1.25rem;
+    }
+    .chunk-body h3 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #6b7280;
+      margin: 0.75rem 0 0.35rem;
+    }
+    .chunk-body h3:first-child {
+      margin-top: 0;
+    }
+    .chunk-body p, .chunk-body li {
+      font-size: 0.92rem;
+      color: #374151;
+      margin: 0.25rem 0;
+    }
+    .chunk-body ul {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+    .chunk-body code {
+      background: #f1f4f8;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.85em;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: #d63384;
+    }
+    .badge {
+      display: inline-block;
+      background: #e6f7f1;
+      color: #00b386;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .badge-gray {
+      background: #f1f4f8;
+      color: #4b5563;
+    }
+    .badge-yellow {
+      background: #fffbeb;
+      color: #b45309;
+    }
+    .footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e2e6ec;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+    .dependency-flow {
+      background: #f8f9fc;
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-top: 2rem;
+      border: 1px solid #e2e6ec;
+    }
+    .dependency-flow h2 {
+      font-size: 1.2rem;
+      margin: 0 0 0.75rem;
+    }
+    .dependency-flow pre {
+      background: #0b0e11;
+      color: #e8e9ed;
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+<h1>📋 StockSignal AI – Development Chunks</h1>
+<p class="subtitle">18 executable chunks to build, test, and ship the product incrementally.</p>
+
+<div class="chunk-grid">
+
+  <div class="chunk-card">
+    <div class="chunk-header">
+      <h2>Chunk 1: Foundation & Environment Setup</h2>
+      <div class="chunk-meta">
+        <span class="badge">Dependencies: None</span>
+      </div>
+    </div>
+    <div class="chunk-body">
+      <h3>Goal</h3>
+      <p>Get the Next.js app running locally with TypeScript, Tailwind, and linting.</p>
+      <h3>Key Tasks</h3>
+      <ul>
+        <li>Initialize Next.js 14 with App Router + TypeScript</li>
+        <li>Install and configure Tailwind CSS</li>
+        <li>Set up ESLint</li>
+        <li>Create <code>.env.example</code></li>
+        <li>Verify <code>npm run dev</code></li>
+      </ul>
+      <h3>Acceptance Criteria</h3>
+      <ul>
+        <li><code>npm run dev</code> serves at localhost:3000</li>
+        <li><code>npm run lint</code> passes</li>
+        <li><code>npm run typecheck</code> passes</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chunk-card">
+    <div class="chunk-header">
+      <h2>Chunk 2: Shared Types & Utilities</h2>
+      <div class="chunk-meta">
+        <span class="badge">Dependencies: Chunk 1</span>
+      </div>
+    </div>
+    <div class="chunk-body">
+      <h3>Goal</h3>
+      <p>Define TypeScript types and helper functions used across the app.</p>
+      <h3>Key Tasks</h3>
+      <ul>
+        <li>Create types: <code>StockQuote</code>, <code>SignalResult</code>, <code>MarketStatus</code></li>
+        <li>Symbol validation &amp; sanitization utilities</li>
+        <li>Price formatting utilities (decimal precision)</li>
+        <li>Timezone utilities (UTC ↔ IST)</li>
+      </ul>
+      <h3>Acceptance Criteria</h3>
+      <ul>
+        <li><code>sanitizeSymbol('RELIANCE.NS')</code> returns normalized symbol</li>
+        <li><code>sanitizeSymbol('INVALID!')</code> throws error</li>
+        <li><code>formatPrice(1234.5, 'RELIANCE.NS')</code> returns <code>'1234.50'</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chunk-card">
+    <div class="chunk-header">
+      <h2>Chunk 3: Market Status Service</h2>
+      <div class="chunk-meta">
+        <span class="badge">Dependencies: Chunk 2</span>
+      </div>
+    </div>
+    <div class="chunk-body">
+      <h3>Goal</h3>
+      <p>Implement accurate market open/close detection for IST, including weekends and holidays.</p>
+      <h3>Key Tasks</h3>
+      <ul>
+        <li>Implement <code>isMarketOpen()</code> using <code>Intl.DateTimeFormat</code></li>
+        <li>Add market holidays list</li>
+        <li>Write unit tests for boundary conditions</li>
+      </ul>
+      <h3>Acceptance Criteria</h3>
+      <ul>
+        <li>Returns <code>OPEN</code> at 09:30 IST weekday</li>
+        <li>Returns <code>CLOSED</code> at 09:14 IST weekday</li>
+        <li>Returns <code>CLOSED</code> on weekends/holidays</li>
+        <li>All unit tests pass</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chunk-card">
+    <div class="chunk-header">
+      <h2>Chunk 4: API Infrastructure</h2>
+      <div class="chunk-meta">
+        <span class="badge">Dependencies: Chunk 2</span>
+      </div>
+    </div>
+    <div class="chunk-body">
+      <h3>Goal</h3>
+      <p>Create API route structure and database clients.</p>
+      <h3>Key Tasks</h3>
+      <ul>
+        <li>Create Supabase client singleton</li>
+        <li>Create Upstash Redis client singleton</li>
+        <li>Create <code>/api/health</code> and <code>/api/market/status</code></li>
+        <li>Set up CORS headers</li>
+      </ul>
+      <h3>Acceptance Criteria</h3>
+      <ul>
+        <li><code>GET /api/health</code> returns <code>{ status: 'ok' }</code></li>
+        <li><code>GET /api/market/status</code> returns open/closed state</li>
+        <li>CORS headers present on all responses</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chunk-card">
+    <div class="chunk-header">
+      <h2>Chunk 5: Data Layer – Yahoo Finance Integration</h2>
+      <div class="chunk-meta">
+        <span class="badge">Dependencies: Chunk 4</span>
+      </div>
+    </div>
+    <div class="chunk-body">
+      <h3>Goal</h3>
+      <p>Fetch live and historical stock data with resilience and caching.</p>
+      <h3>Key Tasks</h3>
+      <ul>
+        <li>Implement <code>getLiveQuote(symbol)</code></li>
+        <li>Implement <code>getHistoricalData(symbol, timeframe)</code></li>
+        <li>Add exponential backoff wrapper</li>
+        <li>Add Redis caching (5min quotes, 1hr historical)</li>
+        <li>Implement fallback chain</li>
+      </ul>
+      <h3>Acceptance Criteria</h3>
+      <ul>
+        <li><code>getLiveQuote('RELIANCE.NS')</code> returns quote data</li>
+        <li>Data cached in Redis with TTL</li>
+        <li>Circuit breaker opens after 5 failures</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chunk-card">
+    <div class="chunk-header">
+      <h2>Chunk 6: Technical Indicators Service</h2>
+      <div class="chunk-meta">
+        <span class="badge">Dependencies: Chunk 2, 5</span>
+      </div>
+    </div>
+    <div class="chunk-body">
+      <h3>Goal</h3>
+      <p>Calculate RSI, MACD, Bollinger Bands, and Moving Averages.</p>
+      <h3>Key Tasks</h3>
+      <ul>
+        <li>Implement <code>calculateRSI(prices, period)</code></li>
+        <li>Implement <code>calculateMACD(prices)</code></li>
+        <li>Implement <code>calculateBollingerBands(prices, period)</code></li>
+        <li>Implement <code>calculateMovingAverages(prices, periods)</code></li>
+        <li>Add unit tests with known values</li>
+      </ul>
+      <h3>Acceptance Criteria</h3>
+      <ul>
+        <li>RSI matches expected value (±0.01)</li>
+        <li>MACD crosses signal line correctly</li>
+        <li>Bollinger Bands contain 95% of price data</li>
+        <li>All unit tests pass</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chunk-card">
+    <div class="chunk-header">
+      <h2>Chunk 7: Signal Generation Service</h2>
+      <div class="chunk-meta">
+        <span class="badge">Dependencies: Chunk 6</span>
+      </div>
+    </div>
+    <div class="chunk-body">
+      <h3>Goal</h3>
+      <p>Generate buy/sell/hold signals with confidence scores and AI reasoning.</p>
+      <h3>Key Tasks</h3>
+      <ul>
+        <li>Implement signal generation logic</li>
+        <li>Implement confidence scoring algorithm</li>
+        <li>Add mock AI reasoning generator</li>
+        <li>Implement <code>getTopSignals()</code></li>
+        <li>Add Redis caching (10min TTL)</li>
+      </ul>
+      <h3>Acceptance Criteria</h3>
+      <ul>
+        <li>Returns one of 5 signal types</li>
+        <li>Confidence 0-100</li>
+        <li>Non-empty reasoning string</li>
+        <li>Signals cached in Redis</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chunk-card">
+    <div class="chunk-header">
+      <h2>Chunk 8: Signal API Route</h2>
+      <div class="chunk-meta">
+        <span class="badge">Dependencies: Chunk 3, 5, 7</span>
+      </div>
+    </div>
+    <div class="chunk-body">
+      <h3>Goal</h3>
+      <p>Create <code>/api/signal/[symbol]</code> with market status awareness.</p>
+      <h3>Key Tasks</h3>
+      <ul>
+        <li>Symbol validation &amp; sanitization</li>
+        <li>Fetch quote + calculate signal</li>
+        <li>Tag response with <code>marketStatus</code> and <code>isEOD</code></li>
+        <li>Zero out change when market closed</li>
+        <li>Error handling for invalid symbols/API failures</li>
+      </ul>
+      <h3>Acceptance Criteria</h3>
+      <ul>
+        <li><code>GET /api/signal/RELIANCE.NS</code> returns valid response</li>
+        <li>When closed: <code>isEOD = true</code>, <code>change = 0</code></li>
+        <li>Invalid symbol returns 400</li>
+        <li>API failure returns 503</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chunk-card">
+    <div class="chunk-header">
+      <h2>Chunk 9: Database Schema & Migrations</h2>
+      <div class="chunk-meta">
+        <span class="badge">Dependencies: Chunk 4</span>
+      </div>
+    </div>
+    <div class="chunk-body">
+      <h3>Goal</h3>
+      <p>Set up Supabase tables and RLS policies.</p>
+      <h3>Key Tasks</h3>
+      <ul>
+        <li>Create <code>watchlists</code> table migration</li>
+        <li>Create <code>cached_signals</code> table migration</li>
+        <li>Create <code>screener_presets</code> table migration</li>
+        <li>Enable RLS on all tables</li>
+        <li>Create Supabase repository helpers</li>
+      </ul>
+      <h3>Acceptance Criteria</h3>
+      <ul>
+        <li>Tables exist in Supabase dashboard</li>
+        <li>RLS prevents cross-user access</li>
+        <li>CRUD operations work via client</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chunk-card">
+    <div class="chunk-header">
+      <h2>Chunk 10: Frontend – Layout & Routing</h2>
+      <div class="chunk-meta">
+        <span class="badge">Dependencies: Chunk 1, 3</span>
+      </div>
+    </div>
+    <div class="chunk-body">
+      <h3>Goal</h3>
+      <p>Build app shell with header, market status banner, footer, and routing.</p>
+      <h3>Key Tasks</h3>
+      <ul>
+        <li>Implement <code>Header</code> with logo + search trigger</li>
+        <li>Implement <code>MarketStatusBanner</code></li>
+        <li>Implement <code>Footer</code></li>
+        <li>Set up <code>/stock/[symbol]</code> route</li>
+        <li>Add global CSS design tokens</li>
+      </ul>
+      <h3>Acceptance Criteria</h3>
+      <ul>
+        <li>Header shows logo and search button</li>
+        <li>Banner shows "Market Closed" when applicable</li>
+        <li>Footer renders on every page</li>
+        <li><code>/stock/RELIANCE.NS</code> loads detail page</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chunk-card">
+    <div class="chunk-header">
+      <h2>Chunk 11: Frontend – Stock Detail Page</h2>
+      <div class="chunk-meta">
+        <span class="badge">Dependencies: Chunk 8, 10</span>
+      </div>
+    </div>
+    <div class="chunk-body">
+      <h3>Goal</h3>
+      <p>Build main stock analysis view with charts and signal card.</p>
+      <h3>Key Tasks</h3>
+      <ul>
+        <li>Implement <code>CandlestickChart</code> (Lightweight Charts)</li>
+        <li>Implement <code>RSIChart</code>, <code>MACDChart</code>, <code>VolumeChart</code></li>
+        <li>Implement <code>SignalCard</code> with badge + confidence</li>
+        <li>Implement timeframe selector (1m, 5m, 15m, 1h, 1d)</li>
+        <li>Fetch from <code>/api/signal/[symbol]</code></li>
+      </ul>
+      <h3>Acceptance Criteria</h3>
+      <ul>
+        <li>Candlestick chart renders OHLC data</li>
+        <li>RSI/MACD/Volume render below main chart</li>
+        <li>Signal badge shows correct color</li>
+        <li>Timeframe selector updates chart</li>
+        <li>EOD banner appears when closed</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chunk-card">
+    <div class="chunk-header">
+      <h2>Chunk 12: Frontend – Search & Watchlist</h2>
+      <div class="chunk-meta">
+        <span class="badge">Dependencies: Chunk 9, 11</span>
+      </div>
+    </div>
+    <div class="chunk-body">
+      <h3>Goal</h3>
+      <p>Implement fuzzy search modal and watchlist functionality.</p>
+      <h3>Key Tasks</h3>
+      <ul>
+        <li>Implement <code>SearchModal</code> with ⌘K / Ctrl+K</li>
+        <li>Integrate Fuse.js for fuzzy search</li>
+        <li>Implement watchlist CRUD via Supabase</li>
+        <li>Implement <code>useWatchlist</code> hook</li>
+        <li>Show watchlist in sidebar/dropdown</li>
+      </ul>
+      <h3>Acceptance Criteria</h3>
+      <ul>
+        <li>Pressing ⌘K opens search modal</li>
+        <li>Typing "RELI" shows RELIANCE.NS</li>
+        <li>Clicking navigates to stock page</li>
+        <li>Watchlist persists in Supabase</li>
+        <li>Watchlist shows live signal badges</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chunk-card">
+    <div class="chunk-header">
+      <h2>Chunk 13: Screener Page</h2>
+      <div class="chunk-meta">
+        <span class="badge">Dependencies: Chunk 7, 12</span>
+      </div>
+    </div>
+    <div class="chunk-body">
+      <h3>Goal</h3>
+      <p>Build stock screener with filters and results table.</p>
+      <h3>Key Tasks</h3>
+      <ul>
+        <li>Implement <code>ScreenerPanel</code> with filter dropdowns</li>
+        <li>Create <code>/api/screener</code> endpoint</li>
+        <li>Implement screener logic in signals service</li>
+        <li>Add pagination and sorting</li>
+      </ul>
+      <h3>Acceptance Criteria</h3>
+      <ul>
+        <li>Filtering by "Buy" shows BUY/STRONG_BUY only</li>
+        <li>P/E range filter works</li>
+        <li>Results table shows symbol, name, signal, price, confidence</li>
+        <li>Pagination works for 100+ results</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chunk-card">
+    <div class="chunk-header">
+      <h2>Chunk 14: Deployment Configuration</h2>
+      <div class="chunk-meta">
+        <span class="badge">Dependencies: All previous</span>
+      </div>
+    </div>
+    <div class="chunk-body">
+      <h3>Goal</h3>
+      <p>Configure Render.com deployment and keep-alive.</p>
+      <h3>Key Tasks</h3>
+      <ul>
+        <li>Finalize <code>render.yaml</code></li>
+        <li>Set up cron-job.org ping every 10min</li>
+        <li>Configure custom domain (if applicable)</li>
+        <li>Test production build locally</li>
+      </ul>
+      <h3>Acceptance Criteria</h3>
+      <ul>
+        <li><code>npm run build</code> succeeds</li>
+        <li>App starts on Render free tier</li>
+        <li>Health check responds within 5s</li>
+        <li>Service stays awake during business hours</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chunk-card">
+    <div class="chunk-header">
+      <h2>Chunk 15: Monitoring & Observability</h2>
+      <div class="chunk-meta">
+        <span class="badge">Dependencies: Chunk 14</span>
+      </div>
+    </div>
+    <div class="chunk-body">
+      <h3>Goal</h3>
+      <p>Add error tracking, logging, and alerting.</p>
+      <h3>Key Tasks</h3>
+      <ul>
+        <li>Set up Sentry for error tracking</li>
+        <li>Add structured logging to API routes</li>
+        <li>Enhance <code>/api/health</code> with system metrics</li>
+        <li>Set up Render alerts for memory/CPU/errors</li>
+      </ul>
+      <h3>Acceptance Criteria</h3>
+      <ul>
+        <li>Sentry captures API errors in development</li>
+        <li>Logs include timestamp, level, endpoint, duration</li>
+        <li>Health check returns memory + uptime</li>
+        <li>Email alert on 3 health failures in 5min</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chunk-card">
+    <div class="chunk-header">
+      <h2>Chunk 16: Polish & Edge Cases</h2>
+      <div class="chunk-meta">
+        <span class="badge badge-yellow">Dependencies: Chunks 1-15</span>
+      </div>
+    </div>
+    <div class="chunk-body">
+      <h3>Goal</h3>
+      <p>Handle robustness edge cases from README Section 17.</p>
+      <h3>Key Tasks</h3>
+      <ul>
+        <li>Add circuit filter detection + UI badge</li>
+        <li>Add data staleness warnings</li>
+        <li>Implement skeleton loaders + error boundaries</li>
+        <li>Add PWA manifest + service worker</li>
+        <li>Fix timezone bugs</li>
+        <li>Add accessibility attributes (ARIA, focus trap)</li>
+      </ul>
+      <h3>Acceptance Criteria</h3>
+      <ul>
+        <li>Circuit badge appears on upper/lower circuit</li>
+        <li>Stale data warning after 2 minutes</li>
+        <li>Skeleton loaders during fetch</li>
+        <li>App installable as PWA</li>
+        <li>Keyboard accessible</li>
+        <li>Lighthouse accessibility &gt; 90</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chunk-card">
+    <div class="chunk-header">
+      <h2>Chunk 17: Testing & QA</h2>
+      <div class="chunk-meta">
+        <span class="badge">Dependencies: Chunk 16</span>
+      </div>
+    </div>
+    <div class="chunk-body">
+      <h3>Goal</h3>
+      <p>Achieve 80%+ test coverage and pass E2E flows.</p>
+      <h3>Key Tasks</h3>
+      <ul>
+        <li>Write unit tests for all services</li>
+        <li>Write integration tests for API routes</li>
+        <li>Write E2E tests (search, watchlist, market status)</li>
+        <li>Run Lighthouse audit and fix issues</li>
+        <li>Manual QA on mobile viewports</li>
+      </ul>
+      <h3>Acceptance Criteria</h3>
+      <ul>
+        <li><code>npm run test</code> passes with &gt;80% coverage</li>
+        <li>All E2E tests pass in headless Chromium</li>
+        <li>Lighthouse: performance &gt;85, accessibility &gt;90</li>
+        <li>No console errors in production build</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="chunk-card">
+    <div class="chunk-header">
+      <h2>Chunk 18: Documentation & Launch</h2>
+      <div class="chunk-meta">
+        <span class="badge">Dependencies: Chunk 17</span>
+      </div>
+    </div>
+    <div class="chunk-body">
+      <h3>Goal</h3>
+      <p>Finalize docs and prepare for launch.</p>
+      <h3>Key Tasks</h3>
+      <ul>
+        <li>Update README with setup + screenshots</li>
+        <li>Add <code>CONTRIBUTING.md</code></li>
+        <li>Add <code>CHANGELOG.md</code></li>
+        <li>Create demo video/GIF</li>
+        <li>Tag <code>v1.0.0</code> release</li>
+      </ul>
+      <h3>Acceptance Criteria</h3>
+      <ul>
+        <li>README has clear setup steps</li>
+        <li>New dev can clone &amp; run in &lt;5 min</li>
+        <li>CHANGELOG lists all features/fixes</li>
+        <li>Git tag <code>v1.0.0</code> created</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<div class="dependency-flow">
+  <h2>🔗 Chunk Dependency Flow</h2>
+  <pre>
+Chunk 1  →  Chunk 2  →  Chunk 3  →  Chunk 4  →  Chunk 5  →  Chunk 6
+                                                               ↓
+Chunk 7  ←  ←  ←  ←  ←  ←  ←  ←  ←  ←  ←  ←  ←  ←  ←  ←  ↑
+    ↓                                                           |
+Chunk 8  →  Chunk 10  →  Chunk 11  →  Chunk 12  →  Chunk 13  |
+    ↓              ↓              ↓              ↓               |
+Chunk 9  →  (parallel)    (parallel)    (parallel)             |
+    ↓                                                          |
+Chunk 14  →  Chunk 15  →  Chunk 16  →  Chunk 17  →  Chunk 18
+
+Parallel tracks after Chunk 8:
+  Track A: Chunk 9  (Database)
+  Track B: Chunk 10 (Layout)
+  Track C: Chunk 11 (Stock Detail)
+  Track D: Chunk 12 (Search/Watchlist)
+  </pre>
+</div>
+
+<div class="footer">
+  <p><strong>Build with ❤️ for Indian retail investors.</strong></p>
+  <p>Document version 1.0 — September 2026</p>
+</div>
+
+</div>
+</body>
+</html>

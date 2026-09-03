@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Environment Details</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #f8f9fc;
+      color: #1e1e2a;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 2.5rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    }
+    h1 {
+      font-size: 2.4rem;
+      border-bottom: 3px solid #00b386;
+      padding-bottom: 0.75rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .info-card {
+      background: #f8f9fc;
+      border-radius: 8px;
+      padding: 1.5rem;
+      border-left: 4px solid #00b386;
+    }
+    .info-card h3 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #6b7280;
+      margin-bottom: 0.5rem;
+      margin-top: 0;
+    }
+    .info-card p {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #0b0e11;
+      margin: 0;
+      word-break: break-all;
+    }
+    .timestamp {
+      background: #fff8e1;
+      border-left: 4px solid #f0b90b;
+      padding: 1rem 1.5rem;
+      border-radius: 4px;
+      margin-top: 2rem;
+    }
+    .timestamp p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #1e1e2a;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+<h1>Environment Details</h1>
+
+<div class="info-grid">
+  <div class="info-card">
+    <h3>Current Time (UTC)</h3>
+    <p>2026-09-02T05:26:16+00:00</p>
+  </div>
+  <div class="info-card">
+    <h3>Working Directory</h3>
+    <p>/workspace/b3727571-24fe-4952-8277-87e5c681167e/sessions/agent_e2fa3853-ba32-4dea-b555-32a13e2b097b</p>
+  </div>
+  <div class="info-card">
+    <h3>Workspace Root Folder</h3>
+    <p>/workspace/b3727571-24fe-4952-8277-87e5c681167e/sessions/agent_e2fa3853-ba32-4dea-b555-32a13e2b097b</p>
+  </div>
+</div>
+
+<div class="timestamp">
+  <p><strong>Generated at:</strong> 2026-09-02T05:26:16+00:00</p>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StockSignal AI – Launch Guide</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #f8f9fc;
+      color: #1e1e2a;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 1000px; margin: 0 auto; background: #fff; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); overflow: hidden; }
+    .hero { background: linear-gradient(135deg, #00b386 0%, #009670 100%); color: white; padding: 3rem; text-align: center; }
+    .hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .hero p { font-size: 1.1rem; opacity: 0.9; }
+    .content { padding: 2.5rem 3rem; }
+    h2 { font-size: 1.6rem; border-bottom: 2px solid #e2e6ec; padding-bottom: 0.5rem; margin: 2rem 0 1.25rem; color: #0b0e11; }
+    h3 { font-size: 1.2rem; color: #00b386; margin: 1.5rem 0 0.75rem; }
+    h4 { font-size: 1rem; color: #374151; margin: 1rem 0 0.5rem; }
+    code { background: #f1f4f8; padding: 0.15rem 0.4rem; border-radius: 4px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.9em; color: #d63384; }
+    pre { background: #0b0e11; color: #e8e9ed; padding: 1.25rem 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.85rem; line-height: 1.5; margin: 0.75rem 0; }
+    pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+    .step-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .step { background: #f8f9fc; border-radius: 8px; padding: 1.25rem; border-left: 4px solid #00b386; }
+    .step-number { display: inline-block; background: #00b386; color: white; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-weight: 700; margin-bottom: 0.5rem; }
+    .step h4 { margin: 0 0.5rem; }
+    .warning { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 1rem 1.5rem; border-radius: 4px; margin: 1rem 0; }
+    .success { background: #d1fae5; border-left: 4px solid #10b981; padding: 1rem 1.5rem; border-radius: 4px; margin: 1rem 0; }
+    .error { background: #fee2e2; border-left: 4px solid #ef4444; padding: 1rem 1.5rem; border-radius: 4px; margin: 1rem 0; }
+    .table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .table th, .table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid #e5e7eb; }
+    .table th { background: #f9fafb; font-weight: 600; color: #374151; }
+    .table td code { background: #f1f4f8; }
+    .badge { display: inline-block; background: #e6f7f1; color: #00b386; padding: 0.15rem 0.6rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+    .badge-gray { background: #f1f4f8; color: #6b7280; }
+    .badge-red { background: #fee2e2; color: #dc2626; }
+    .footer { background: #1e1e2a; color: #9ca3af; text-align: center; padding: 2rem; font-size: 0.9rem; }
+    ul { margin-left: 1.5rem; margin: 0.5rem 0; }
+    li { margin: 0.25rem 0; }
+    .divider { height: 1px; background: #e2e6ec; margin: 2rem 0; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hero">
+    <h1>🚀 StockSignal AI – Launch Guide</h1>
+    <p>Complete walkthrough: local dev → Supabase → Redis → Render.com</p>
+  </div>
+
+  <div class="content">
+
+    <h2>Table of Contents</h2>
+    <ul>
+      <li>1. Prerequisites</li>
+      <li>2. Local Development (Zero Config)</li>
+      <li>3. Supabase Setup (Free Tier)</li>
+      <li>4. Upstash Redis Setup (Free Tier)</li>
+      <li>5. Configure .env.local</li>
+      <li>6. Run the App</li>
+      <li>7. Deploy to Render.com</li>
+      <li>8. Keep-Alive Setup</li>
+      <li>9. Verification Checklist</li>
+      <li>10. Troubleshooting</li>
+    </ul>
+
+    <div class="divider"></div>
+
+    <h2>1. Prerequisites</h2>
+    <div class="step-grid">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h4>Node.js</h4>
+        <p>Node.js 18.x LTS or newer</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h4>npm</h4>
+        <p>npm 9.x (comes with Node.js)</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h4>Git</h4>
+        <p>Git 2.30+</p>
+      </div>
+    </div>
+
+    <h2>2. Local Development (Zero Config)</h2>
+    <p>If you just want to try the app without database/cache setup, skip to step 6.</p>
+
+    <pre><code>git clone https://github.com/&lt;your-username&gt;/stocks.git
+cd stocks
+cp .env.example .env.local
+npm install
+npm run dev</code></pre>
+
+    <div class="warning">
+      <strong>Note:</strong> Without Supabase and Redis, the app runs in degraded mode. Signals still work from yfinance, but watchlists won't persist and caching is in-memory only.
+    </div>
+
+    <h2>3. Supabase Setup (Free Tier)</h2>
+    <p>Supabase provides PostgreSQL for storing watchlists and cached signals.</p>
+
+    <h3>Steps:</h3>
+    <ol>
+      <li>Create a free account at <a href="https://supabase.com">supabase.com</a></li>
+      <li>Click "New Project" and fill in:
+        <ul>
+          <li><strong>Name:</strong> stocksignal-ai</li>
+          <li><strong>Database Password:</strong> Choose a strong password (save it!)</li>
+          <li><strong>Region:</strong> Singapore (closest to India)</li>
+        </ul>
+      </li>
+      <li>Wait for project creation (~2 minutes)</li>
+      <li>Navigate to <strong>Project Settings → API</strong> and copy:
+        <ul>
+          <li><code>NEXT_PUBLIC_SUPABASE_URL</code></li>
+          <li><code>anon public</code> key</li>
+        </ul>
+      </li>
+      <li>Run migrations in the <strong>SQL Editor</strong>:
+        <pre><code>-- Open src/lib/supabase/migrations/001_watchlists.sql and run it
+-- Then 002_cached_signals.sql
+-- Then 003_screener_presets.sql</code></pre>
+      </li>
+      <li>Enable Row Level Security (RLS) on all three tables</li>
+    </ol>
+
+    <h2>4. Upstash Redis Setup (Free Tier)</h2>
+    <p>Upstash provides managed Redis for caching and rate limiting.</p>
+
+    <h3>Steps:</h3>
+    <ol>
+      <li>Create a free account at <a href="https://upstash.com">upstash.com</a></li>
+      <li>Click "Redis Database" → "Create Database"</li>
+      <li>Choose:
+        <ul>
+          <li><strong>Name:</strong> stocksignal-cache</li>
+          <li><strong>Region:</strong> Singapore</li>
+          <li><strong>TLS:</strong> Enabled</li>
+        </ul>
+      </li>
+      <li>Copy the <strong>REST URL</strong> and <strong>Token</strong></li>
+    </ol>
+
+    <h2>5. Configure .env.local</h2>
+    <p>Open <code>.env.local</code> in your editor and fill in the values:</p>
+
+    <table class="table">
+      <thead>
+        <tr><th>Variable</th><th>Source</th><th>Example</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>NEXT_PUBLIC_SUPABASE_URL</code></td><td>Supabase project URL</td><td><code>https://xyz.supabase.co</code></td></tr>
+        <tr><td><code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code></td><td>Supabase anon key</td><td><code>eyJhbGciOiJIUzI1NiIs...</code></td></tr>
+        <tr><td><code>UPSTASH_REDIS_URL</code></td><td>Upstash Redis REST URL</td><td><code>https://xxx.upstash.io</code></td></tr>
+        <tr><td><code>UPSTASH_REDIS_TOKEN</code></td><td>Upstash Redis token</td><td><code>xxx</code></td></tr>
+        <tr><td><code>NEXT_PUBLIC_APP_URL</code></td><td>Your local URL</td><td><code>http://localhost:3000</code></td></tr>
+        <tr><td><code>NEXT_PUBLIC_SENTRY_DSN</code></td><td><span class="badge badge-gray">Optional</span></td><td>(leave empty for local dev)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>6. Run the App</h2>
+
+    <pre><code>npm run dev</code></pre>
+
+    <p>Open <a href="http://localhost:3000">http://localhost:3000</a> in your browser.</p>
+
+    <h3>Available Commands:</h3>
+    <table class="table">
+      <thead><tr><th>Command</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>npm run dev</code></td><td>Development server</td></tr>
+        <tr><td><code>npm run build</code></td><td>Production build</td></tr>
+        <tr><td><code>npm start</code></td><td>Start production server</td></tr>
+        <tr><td><code>npm run test</code></td><td>Run all tests (272 tests)</td></tr>
+        <tr><td><code>npm run lint</code></td><td>Run ESLint</td></tr>
+        <tr><td><code>npm run typecheck</code></td><td>TypeScript type checking</td></tr>
+      </tbody>
+    </table>
+
+    <h2>7. Deploy to Render.com</h2>
+    <p>Render.com provides a free tier (512MB RAM, 0.1 CPU) with Singapore region.</p>
+
+    <h3>Automated Deploy:</h3>
+    <ol>
+      <li>Push to GitHub (main branch autodeploys)</li>
+      <li>Go to <a href="https://render.com">render.com</a> → "New" → "Web Service"</li>
+      <li>Connect your GitHub repo</li>
+      <li>Render auto-detects <code>render.yaml</code></li>
+      <li>Set these environment variables in the Render dashboard:
+        <ul>
+          <li><code>NEXT_PUBLIC_SUPABASE_URL</code></li>
+          <li><code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code></li>
+          <li><code>UPSTASH_REDIS_URL</code></li>
+          <li><code>UPSTASH_REDIS_TOKEN</code></li>
+        </ul>
+      </li>
+      <li>Render builds and deploys automatically</li>
+    </ol>
+
+    <div class="success">
+      <strong>Pro tip:</strong> Set up a custom domain in the Render dashboard under Settings → Custom Domains.
+    </div>
+
+    <h2>8. Keep-Alive Setup (Free Tier)</h2>
+    <p>Render free services sleep after 15 minutes of inactivity.</p>
+
+    <h3>Prevent sleeping during business hours:</h3>
+    <ol>
+      <li>Go to <a href="https://cron-job.org">cron-job.org</a> (free)</li>
+      <li>Create a new cron job:
+        <ul>
+          <li><strong>URL:</strong> <code>https://&lt;your-app&gt;.onrender.com/api/health</code></li>
+          <li><strong>Schedule:</strong> Every 10 minutes</li>
+          <li><strong>Time range:</strong> 03:30 - 08:30 UTC (9 AM - 4 PM IST)</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>9. Verification Checklist</h2>
+    <ul>
+      <li>☐ <code>npm run lint</code> — No errors</li>
+      <li>☐ <code>npm run typecheck</code> — No errors</li>
+      <li>☐ <code>npm run build</code> — Compiles successfully</li>
+      <li>☐ <code>npm run test</code> — All 272 tests pass</li>
+      <li>☐ App loads at <code>http://localhost:3000</code></li>
+      <li>☐ <code>GET /api/health</code> returns <code>{ status: "ok" }</code></li>
+      <li>☐ Search for "RELIANCE.NS" works</li>
+      <li>☐ Signal generates correctly</li>
+      <li>☐ Market status banner shows correctly</li>
+      <li>☐ v1.0.0 git tag exists</li>
+    </ul>
+
+    <h2>10. Troubleshooting</h2>
+
+    <h3>Build fails with "out of memory"</h3>
+    <pre><code>NODE_OPTIONS="--max-old-space-size=512" npm run build</code></pre>
+
+    <h3>Redis connection errors</h3>
+    <p>Ensure <code>UPSTASH_REDIS_URL</code> and <code>UPSTASH_REDIS_TOKEN</code> are correct. The app will still work without Redis (degraded performance).</p>
+
+    <h3>Supabase connection errors</h3>
+    <p>Verify the URL and key are correct. RLS policies must be enabled but the app works without auth for public data. Ensure migrations were run.</p>
+
+    <h3>yfinance rate limiting</h3>
+    <p>The app auto-retries 3x with exponential backoff, then falls back to Indian-Stock-Market-API, then to cached data.</p>
+
+    <h3>Port 3000 already in use</h3>
+    <pre><code>npx kill-port 3000</code></pre>
+
+  </div>
+
+  <div class="footer">
+    <p><strong>StockSignal AI v1.0.0</strong></p>
+    <p>Built with ❤️ for Indian retail investors.</p>
+  </div>
+
+</div>
+</body>
+</html>
